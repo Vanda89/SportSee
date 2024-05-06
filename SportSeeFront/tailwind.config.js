@@ -6,6 +6,13 @@ export default {
       rotate: {
         270: '270deg',
       },
+      spacing: {
+        5.5: '1.375rem',
+      },
+      colors: {
+        lightGrey: '#74798C',
+        darkGrey: '#282D30',
+      },
     },
     fontFamily: {
       roboto: ['Roboto', 'sans-serif'],

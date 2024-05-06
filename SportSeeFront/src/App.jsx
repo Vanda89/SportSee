@@ -10,7 +10,7 @@ function App() {
     <React.StrictMode>
       <BrowserRouter>
         <Header />
-        <div className="flex">
+        <div className="flex justify-between">
           <Navbar />
           <Router />
         </div>
