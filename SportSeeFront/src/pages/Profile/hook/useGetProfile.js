@@ -32,8 +32,8 @@ export function useGetProfile({ id }) {
       .then((values) => {
         setProfile(values[0]);
         setActivity(values[1]);
-        setAverageSessions(values[3]);
-        setPerformance(values[2]);
+        setAverageSessions(values[2]);
+        setPerformance(values[3]);
         setIsLoading(false);
       })
       .catch((error) => {
@@ -41,7 +41,6 @@ export function useGetProfile({ id }) {
         setIsLoading(false);
       });
   }, [id]);
-
   // Return all the data in an object
   return {
     data: {
