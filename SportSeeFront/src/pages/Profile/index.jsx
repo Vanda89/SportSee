@@ -2,7 +2,7 @@ import { useGetProfile } from './hook/useGetProfile';
 import { useParams } from 'react-router-dom';
 
 import ActivityChart from '../../components/ActivityChart/index.jsx';
-import NutritionChart from '../../components/NutritionChart/index.jsx';
+import NutritionCards from '../../components/NutritionCards/index.jsx';
 import SessionsChart from '../../components/SessionsChart/index.jsx';
 import PerformanceChart from '../../components/PerformanceChart/index.jsx';
 import ObjectiveChart from '../../components/ObjectiveChart/index.jsx';
@@ -44,7 +44,7 @@ function Profile() {
             <ObjectiveChart objectives={profile.todayScore || profile.score} />
           </div>
         </div>
-        <NutritionChart nutritionInfos={profile.keyData} />
+        <NutritionCards nutritionInfos={profile.keyData} />
       </section>
     </div>
   );
