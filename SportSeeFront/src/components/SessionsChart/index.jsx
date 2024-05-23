@@ -1,8 +1,59 @@
 import PropTypes from 'prop-types';
 import { LineChart, Line, XAxis, YAxis, Tooltip, Legend } from 'recharts';
 
+const XAxisName = ['L', 'M', 'M', 'J', 'V', 'S', 'D'];
+
+const CustomCursor = (props) => {
+  const { points } = props;
+  const { x } = points[0];
+  const rectangleWidth = 500;
+  return (
+    <foreignObject
+      x={x - rectangleWidth}
+      y={0}
+      width={rectangleWidth}
+      height={400}
+    >
+      <div
+        style={{
+          backgroundColor: 'rgba(255, 0, 0, 0.5)',
+          width: '100%',
+          height: '100%',
+          zIndex: 1,
+        }}
+      />
+    </foreignObject>
+  );
+};
+
+CustomCursor.propTypes = {
+  points: PropTypes.arrayOf(
+    PropTypes.shape({
+      x: PropTypes.number.isRequired,
+      y: PropTypes.number.isRequired,
+    }),
+  ),
+};
+
+const ActiveDot = ({ cx, cy }) => (
+  <g>
+    <circle
+      cx={cx}
+      cy={cy}
+      r={10}
+      strokeWidth={2}
+      className="fill-custom-gray-100"
+    />
+    <circle cx={cx} cy={cy} r={4} className="fill-white" />
+  </g>
+);
+
+ActiveDot.propTypes = {
+  cx: PropTypes.number.isRequired,
+  cy: PropTypes.number.isRequired,
+};
+
 function SessionsChart(props) {
-  const XAxisName = ['L', 'M', 'M', 'J', 'V', 'S', 'D'];
   const data = [
     { day: '', value: 0 },
     ...props.sessions.sessions.map((session, index) => ({
@@ -12,59 +63,8 @@ function SessionsChart(props) {
     { day: '', value: 75 },
   ];
 
-  const CustomCursor = (props) => {
-    const { points } = props;
-    const { x } = points[0];
-    const rectangleWidth = 500;
-    return (
-      <foreignObject
-        x={x - rectangleWidth}
-        y={0}
-        width={rectangleWidth}
-        height={400}
-      >
-        <div
-          style={{
-            backgroundColor: 'rgba(255, 0, 0, 0.5)',
-            width: '100%',
-            height: '100%',
-            zIndex: 1,
-          }}
-        />
-      </foreignObject>
-    );
-  };
-
-  CustomCursor.propTypes = {
-    points: PropTypes.arrayOf(
-      PropTypes.shape({
-        x: PropTypes.number.isRequired,
-        y: PropTypes.number.isRequired,
-      }),
-    ),
-  };
-
-  const ActiveDot = ({ cx, cy }) => (
-    <g>
-      <circle
-        cx={cx}
-        cy={cy}
-        r={10}
-        strokeWidth={2}
-        fill="#f9fafb"
-        fillOpacity={0.3}
-      />
-      <circle cx={cx} cy={cy} r={4} fill="#fff" />
-    </g>
-  );
-
-  ActiveDot.propTypes = {
-    cx: PropTypes.number.isRequired,
-    cy: PropTypes.number.isRequired,
-  };
-
   return (
-    <div className="profile-average-sessions h-full w-64 bg-primary  text-15 rounded-md">
+    <div className="profile-average-sessions h-full w-64 h-64 bg-custom-red-600  text-15 rounded-md">
       <LineChart
         width={256}
         height={264}
@@ -85,19 +85,17 @@ function SessionsChart(props) {
           cursor={<CustomCursor />}
         />
         <XAxis
+          className="fill-custom-white-50 text-xs"
           dataKey="day"
-          tick={{ fill: 'rgba(255, 255, 255, 0.5)' }}
+          tick={{ fill: 'var(--color-custom-white-50)' }}
           axisLine={false}
           tickLine={false}
-          style={{ fontSize: '12px' }}
         />
         <YAxis hide={true} domain={['dataMin-20', 'dataMax+10']} />
 
         <Legend
           content={() => (
-            <div
-              style={{ color: 'rgba(255, 255, 255, 0.5)', marginLeft: '35px' }}
-            >
+            <div className="text-custom-white-50 ml-9 ">
               Durée moyenne des sessions
             </div>
           )}

@@ -1,47 +1,48 @@
 import PropTypes from 'prop-types';
 import { Radar, RadarChart, PolarGrid, PolarAngleAxis } from 'recharts';
 
+const performanceCategories = [
+  'Cardio',
+  'Energie',
+  'Endurance',
+  'Force',
+  'Vitesse',
+  'Intensité',
+];
 function PerformanceChart(props) {
-  const trad = [
-    'Cardio',
-    'Energie',
-    'Endurance',
-    'Force',
-    'Vitesse',
-    'Intensité',
-  ];
-
   const data = [...props.performance.data]
     .sort((a, b) => a.kind - b.kind)
     .map((item) => ({
-      kind: trad[item.kind - 1],
+      kind: performanceCategories[item.kind - 1],
       value: item.value,
     }))
     .reverse();
 
   return (
-    <div className="profile-performance h-full w-64 bg-darkGrey rounded-md text-white flex justify-center items-center">
+    <div className="profile-performance h-full w-64 bg-custom-slate-800 rounded-md text-white flex justify-center items-center">
       <RadarChart
+        className="fill-white"
         data={data}
         width={250}
         height={250}
         cx="50%"
         cy="50%"
         outerRadius="70%"
-        fill="#fff"
       >
-        <PolarGrid gridType="polygon" stroke="#fff" radialLines={false} />
+        <PolarGrid
+          gridType="polygon"
+          className="stroke-white"
+          radialLines={false}
+        />
         <PolarAngleAxis
           dataKey="kind"
-          fill="#FFF"
-          stroke="#FFF"
+          tick={{ fill: '#FFF', fontSize: '12px' }}
           tickLine={false}
           startAngle={90}
           endAngle={-270}
-          style={{ fontSize: '12px' }}
         />
         <Radar
-          fill="#e60000"
+          className="fill-custom-red-600"
           dataKey="value"
           fillOpacity={0.6}
           domain={[0, 10]}

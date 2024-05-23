@@ -11,6 +11,13 @@ import {
  * @param {Object} params - The parameters for the hook.
  * @param {string} params.id - The ID of the user.
  * @returns {Object} The user data, loading state, and any error encountered.
+ * @property {Object} data - The user data.
+ * @property {Object} data.profile - The user's profile data.
+ * @property {Object} data.activity - The user's activity data.
+ * @property {boolean} data.averageSessions - The user's average sessions data.
+ * @property {Object} data.performance - The user's performance data.
+ * @property {Error} error - Any error encountered while fetching the data.
+ * @property {boolean} isLoading - The loading state of the data fetch.
  */
 export function useGetProfile({ id }) {
   // Initialize the state variables

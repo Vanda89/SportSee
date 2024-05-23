@@ -11,8 +11,8 @@ function NutritionItem({ className, icon, value, label, bgColor }) {
     >
       <img className={`px-5.5 py-5 ${bgColor} rounded-md`} src={icon} alt="" />
       <div>
-        <p className="text-darkGrey">{value}</p>
-        <p className="text-lightGrey">{label}</p>
+        <p className="text-custom-slate-800">{value}</p>
+        <p className="text-custom-slate-500">{label}</p>
       </div>
     </div>
   );

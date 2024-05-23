@@ -1,40 +1,37 @@
 import PropTypes from 'prop-types';
 import { RadialBarChart, RadialBar, Legend, Cell } from 'recharts';
 
-function ObjectiveChart({ objectives }) {
-  const data = [
-    { name: 'Objectif', value: 1 - parseFloat(objectives) },
-    { name: 'Pourcentage réalisé', value: parseFloat(objectives) },
-  ];
-  console.log(data);
+const CustomizedLabel = ({ value }) => (
+  <text
+    className="objective-percentage fill-custom-slate-800 font-bold text-26"
+    x={125}
+    y={115}
+    textAnchor="middle"
+  >
+    {value ? `${value * 100}%` : ''}
+    <tspan
+      className="fill-custom-slate-500 font-medium text-base"
+      x={125}
+      dy={25}
+    >
+      de votre
+    </tspan>
+    <tspan
+      className="fill-custom-slate-500 font-medium text-base"
+      x={125}
+      dy={25}
+    >
+      objectif
+    </tspan>
+  </text>
+);
 
-  const CustomizedLabel = () => {
-    return (
-      <text
-        x={125}
-        y={115}
-        fill="#282D30"
-        textAnchor="middle"
-        style={{ fill: '#282D30', fontWeight: '700', fontSize: '26px' }}
-      >
-        {`${data[1].value * 100}%`}
-        <tspan
-          x={125}
-          dy={25}
-          style={{ fill: '#74798C', fontWeight: '500', fontSize: '16px' }}
-        >
-          de votre
-        </tspan>
-        <tspan
-          x={125}
-          dy={25}
-          style={{ fill: '#74798C', fontWeight: '500', fontSize: '16px' }}
-        >
-          objectif
-        </tspan>
-      </text>
-    );
-  };
+CustomizedLabel.propTypes = {
+  value: PropTypes.number,
+};
+
+function ObjectiveChart({ objectives }) {
+  const data = [{ name: 'Pourcentage réalisé', value: parseFloat(objectives) }];
 
   return (
     <div className="profile-objective relative h-64 w-64 bg-gray-50 rounded-md flex items-center justify-center">
@@ -46,43 +43,31 @@ function ObjectiveChart({ objectives }) {
         innerRadius="90%"
         outerRadius="110%"
         barSize={10}
-        data={[data[1]]}
+        data={data}
         startAngle={90}
-        endAngle={data[1].value * 360 + 90}
-        style={{ position: 'absolute' }}
+        endAngle={360 * data[0].value + 90}
+        style={{ position: 'absolute', zIndex: 1 }}
       >
-        <RadialBar minAngle={15} clockWise dataKey="value" cornerRadius={10}>
+        <RadialBar
+          minAngle={15}
+          dataKey="value"
+          cornerRadius={10}
+          label={CustomizedLabel}
+        >
           <Cell fill="#e60000" />
         </RadialBar>
         <Legend
-          content={() => <div className="font-medium ml-5 mt-3">Score</div>}
+          content={() => (
+            <div className="font-medium ml-5 mt-3 text-custom-slate-800 ">
+              Score
+            </div>
+          )}
           layout="vertical"
           verticalAlign="top"
           align="left"
         />
       </RadialBarChart>
-      <RadialBarChart
-        width={250}
-        height={250}
-        cx="50%"
-        cy="50%"
-        innerRadius="0%"
-        outerRadius="140%"
-        barSize={200}
-        data={[data[0]]}
-        startAngle={90}
-        endAngle={450}
-        style={{ position: 'absolute' }}
-      >
-        <RadialBar
-          minAngle={15}
-          clockWise
-          dataKey="value"
-          label={CustomizedLabel}
-        >
-          <Cell fill="#fff" />
-        </RadialBar>
-      </RadialBarChart>
+      <div className="absolute w-38 h-38 bg-white rounded-full"></div>
     </div>
   );
 }
