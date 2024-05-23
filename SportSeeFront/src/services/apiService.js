@@ -1,8 +1,10 @@
 /**
  * This module contains functions that simulate API calls
- * to retrieve different pieces of information about a user from mocked data.
+ * to retrieve different pieces of information about a user from mocked data and a real API.
+ *
  * @module apiService
  */
+import { CONFIG } from '../const';
 import {
   USER_MAIN_DATA,
   USER_ACTIVITY,
@@ -10,77 +12,119 @@ import {
   USER_PERFORMANCE,
 } from '../data/mockData';
 
+/**
+ * Get the main data of all users
+ * @returns {Promise} A promise that resolves to an array of user objects
+ */
 export function getUsers() {
-  const users = USER_MAIN_DATA;
-
-  if (!users) {
-    return Promise.reject(new Error('Users not found'));
+  if (CONFIG.mock) {
+    const users = USER_MAIN_DATA;
+    if (!users) {
+      return Promise.reject(new Error('Users not found'));
+    }
+    return Promise.resolve(users);
+  } else {
+    const userIds = USER_MAIN_DATA.map((user) => user.id);
+    return Promise.all(
+      userIds.map((userId) =>
+        fetch(`http://localhost:3000/user/${userId}`)
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error('Network response was not ok');
+            }
+            return response.json();
+          })
+          .then((response) => {
+            // Extract the data from the response
+            return response.data;
+          }),
+      ),
+    );
   }
-  return Promise.resolve(users);
 }
 
 /**
- * Retrieves the main data of the user.
+ * Get data for a specific user.
  * @param {string} userId - The ID of the user.
- * @returns {Promise<Object>} A promise that resolves to the user's main data.
+ * @returns {Promise} A promise that resolves to the user's data.
  */
 export function getUserData(userId) {
-  const user = USER_MAIN_DATA.find((user) => user.id.toString() === userId);
-
-  if (!user) {
-    return Promise.reject(new Error('User not found'));
+  if (CONFIG.mock) {
+    const user = USER_MAIN_DATA.find((user) => user.id.toString() === userId);
+    if (!user) {
+      return Promise.reject(new Error('User not found'));
+    }
+    return Promise.resolve(user);
+  } else {
+    return fetch(`http://localhost:3000/user/${userId}`)
+      .then((response) => response.json())
+      .then((response) => response.data)
+      .catch((error) => console.error('Error:', error));
   }
-
-  return Promise.resolve(user);
 }
 
 /**
- * Retrieves the activity data of the user.
+ * Get activity data for a specific user.
  * @param {string} userId - The ID of the user.
- * @returns {Promise<Object>} A promise that resolves to the user's activity data.
+ * @returns {Promise} A promise that resolves to the user's activity data.
  */
 export function getUserActivity(userId) {
-  const activity = USER_ACTIVITY.find(
-    (activity) => activity.userId.toString() === userId,
-  );
-
-  if (!activity) {
-    return Promise.reject(new Error('Activity not found'));
+  if (CONFIG.mock) {
+    const activity = USER_ACTIVITY.find(
+      (activity) => activity.userId.toString() === userId,
+    );
+    if (!activity) {
+      return Promise.reject(new Error('Activity not found'));
+    }
+    return Promise.resolve(activity);
+  } else {
+    return fetch(`http://localhost:3000/user/${userId}/activity`)
+      .then((response) => response.json())
+      .then((response) => response.data)
+      .catch((error) => console.error('Error:', error));
   }
-
-  return Promise.resolve(activity);
 }
 
 /**
- * Retrieves the average sessions data of the user.
+ * Get average session data for a specific user.
  * @param {string} userId - The ID of the user.
- * @returns {Promise<Object>} A promise that resolves to the user's average sessions data.
+ * @returns {Promise} A promise that resolves to the user's average session data.
  */
 export function getUserAverageSessions(userId) {
-  const averageSessions = USER_AVERAGE_SESSIONS.find(
-    (averageSessions) => averageSessions.userId.toString() === userId,
-  );
-
-  if (!averageSessions) {
-    return Promise.reject(new Error('Average sessions not found'));
+  if (CONFIG.mock) {
+    const averageSessions = USER_AVERAGE_SESSIONS.find(
+      (averageSessions) => averageSessions.userId.toString() === userId,
+    );
+    if (!averageSessions) {
+      return Promise.reject(new Error('Average sessions not found'));
+    }
+    return Promise.resolve(averageSessions);
+  } else {
+    return fetch(`http://localhost:3000/user/${userId}/average-sessions`)
+      .then((response) => response.json())
+      .then((response) => response.data)
+      .catch((error) => console.error('Error:', error));
   }
-
-  return Promise.resolve(averageSessions);
 }
 
 /**
- * Retrieves the performance data of the user.
+ * Get performance data for a specific user.
  * @param {string} userId - The ID of the user.
- * @returns {Promise<Object>} A promise that resolves to the user's performance data.
+ * @returns {Promise} A promise that resolves to the user's performance data.
  */
 export function getUserPerformance(userId) {
-  const performance = USER_PERFORMANCE.find(
-    (performance) => performance.userId.toString() === userId,
-  );
-
-  if (!performance) {
-    return Promise.reject(new Error('Performance not found'));
+  if (CONFIG.mock) {
+    const performance = USER_PERFORMANCE.find(
+      (performance) => performance.userId.toString() === userId,
+    );
+    if (!performance) {
+      return Promise.reject(new Error('Performance not found'));
+    }
+    return Promise.resolve(performance);
+  } else {
+    return fetch(`http://localhost:3000/user/${userId}/performance`)
+      .then((response) => response.json())
+      .then((response) => response.data)
+      .catch((error) => console.error('Error:', error));
   }
-
-  return Promise.resolve(performance);
 }
