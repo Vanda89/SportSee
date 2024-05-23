@@ -1,8 +1,12 @@
+import React from 'react';
 import Logo from '../../assets/logo/logo_header.png';
 import { NavLink } from 'react-router-dom';
 import { ROUTES } from '../../const';
+import { UserContext } from '../../contexts/UserContext';
 
 export default function Header() {
+  const { userId, isLinkEnabled } = React.useContext(UserContext);
+
   return (
     <div className="flex bg-black text-white py-5 gap-20">
       <div>
@@ -14,13 +18,17 @@ export default function Header() {
             <NavLink to={ROUTES.HOME}>Accueil</NavLink>
           </li>
           <li>
-            <NavLink to={ROUTES.PROFILE}>Profil</NavLink>
+            {isLinkEnabled ? (
+              <NavLink to={`${ROUTES.PROFILE}/${userId}`}>Profil</NavLink>
+            ) : (
+              'Profil'
+            )}
           </li>
           <li>
-            <NavLink to="">Réglage</NavLink>
+            {isLinkEnabled ? <NavLink to="">Réglage</NavLink> : 'Réglage'}
           </li>
           <li>
-            <NavLink to="">Communauté</NavLink>
+            {isLinkEnabled ? <NavLink to="">Communauté</NavLink> : 'Communauté'}
           </li>
         </ul>
       </nav>
