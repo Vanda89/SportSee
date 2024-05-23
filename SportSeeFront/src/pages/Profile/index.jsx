@@ -1,34 +1,44 @@
 import { useGetProfile } from './hook/useGetProfile';
-import { useParams } from 'react-router-dom';
-
+import { useParams, useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 import ActivityChart from '../../components/ActivityChart/index.jsx';
 import NutritionCards from '../../components/NutritionCards/index.jsx';
 import SessionsChart from '../../components/SessionsChart/index.jsx';
 import PerformanceChart from '../../components/PerformanceChart/index.jsx';
 import ObjectiveChart from '../../components/ObjectiveChart/index.jsx';
+import Loader from '../../components/Loader/index.jsx';
 
 function Profile() {
   const id = useParams();
+  const navigate = useNavigate();
   const {
     data: { profile, activity, averageSessions, performance },
     error,
     isLoading,
   } = useGetProfile(id);
 
+  useEffect(() => {
+    if (!isLoading && profile === null) {
+      navigate('/not-found');
+    }
+  }, [profile, navigate, isLoading]);
+
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <Loader />;
   }
 
   if (error) {
-    return <div>{error.message}</div>;
+    return <div>Une erreur est survenue : {error.message}</div>;
   }
 
   return (
-    <div className="flex w-full h-full flex-col px-12 lg:px-26 py-10 lg:py-14 gap-16">
+    <div className="flex w-full h-full flex-col px-12 xl:px-26 py-10 xl:py-14 gap-16">
       <section className="profile-header flex flex-col items-center lg:items-start 2xl:items-center gap-8">
         <h1 className="font-medium text-5xl">
           Bonjour{' '}
-          <span className="text-primary">{profile.userInfos.firstName}</span>
+          <span className="text-custom-red-600">
+            {profile.userInfos.firstName}
+          </span>
         </h1>
         <p className="text-lg">
           {' '}
