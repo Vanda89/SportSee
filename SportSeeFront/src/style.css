@@ -11,5 +11,6 @@ body {
     margin: auto;
     padding: 0;
     box-sizing: border-box;
+    overflow-x: auto;
     max-width: 1920px;
 }

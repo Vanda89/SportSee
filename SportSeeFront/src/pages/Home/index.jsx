@@ -1,5 +1,5 @@
 //import PropTypes from 'prop-types';
-import React from 'react';
+import { useContext } from 'react';
 import { useGetUsers } from './hook/useGetUsers';
 import { UserContext } from '../../contexts/UserContext';
 import { NavLink } from 'react-router-dom';
@@ -7,7 +7,7 @@ import Loader from '../../components/Loader/index.jsx';
 
 function Home() {
   const { users, error, isLoading } = useGetUsers();
-  const { setUserId, setIsLinkEnabled } = React.useContext(UserContext);
+  const { setUserId, setIsLinkEnabled } = useContext(UserContext);
 
   if (isLoading) {
     return <Loader />;

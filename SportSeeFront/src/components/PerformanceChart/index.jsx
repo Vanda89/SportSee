@@ -1,22 +1,9 @@
 import PropTypes from 'prop-types';
 import { Radar, RadarChart, PolarGrid, PolarAngleAxis } from 'recharts';
+import { formatPerformance } from '../../data/formatData';
 
-const performanceCategories = [
-  'Cardio',
-  'Energie',
-  'Endurance',
-  'Force',
-  'Vitesse',
-  'Intensité',
-];
-function PerformanceChart(props) {
-  const data = [...props.performance.data]
-    .sort((a, b) => a.kind - b.kind)
-    .map((item) => ({
-      kind: performanceCategories[item.kind - 1],
-      value: item.value,
-    }))
-    .reverse();
+function PerformanceChart({ performance }) {
+  const data = formatPerformance(performance);
 
   return (
     <div className="profile-performance h-full w-64 bg-custom-slate-800 rounded-md text-white flex justify-center items-center">

@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import { RadialBarChart, RadialBar, Legend, Cell } from 'recharts';
+import { formatProfileObjective } from '../../data/formatData';
 
 const CustomizedLabel = ({ value }) => (
   <text
@@ -31,7 +32,7 @@ CustomizedLabel.propTypes = {
 };
 
 function ObjectiveChart({ objectives }) {
-  const data = [{ name: 'Pourcentage réalisé', value: parseFloat(objectives) }];
+  const data = formatProfileObjective(objectives);
 
   return (
     <div className="profile-objective relative h-64 w-64 bg-gray-50 rounded-md flex items-center justify-center">

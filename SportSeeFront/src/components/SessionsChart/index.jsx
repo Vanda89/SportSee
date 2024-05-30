@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 import { LineChart, Line, XAxis, YAxis, Tooltip, Legend } from 'recharts';
-
-const XAxisName = ['L', 'M', 'M', 'J', 'V', 'S', 'D'];
+import { formatAverageSessions } from '../../data/formatData';
 
 const CustomCursor = (props) => {
   const { points } = props;
@@ -53,15 +52,8 @@ ActiveDot.propTypes = {
   cy: PropTypes.number.isRequired,
 };
 
-function SessionsChart(props) {
-  const data = [
-    { day: '', value: 0 },
-    ...props.sessions.sessions.map((session, index) => ({
-      day: XAxisName[index % XAxisName.length],
-      value: session.sessionLength,
-    })),
-    { day: '', value: 75 },
-  ];
+function SessionsChart({ sessions }) {
+  const data = formatAverageSessions(sessions);
 
   return (
     <div className="profile-average-sessions h-full w-64 h-64 bg-custom-red-600  text-15 rounded-md">

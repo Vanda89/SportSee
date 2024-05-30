@@ -9,6 +9,7 @@ import {
   Legend,
   ResponsiveContainer,
 } from 'recharts';
+import { formatActivity } from '../../data/formatData';
 import PropTypes from 'prop-types';
 
 const CustomTooltip = ({ active, payload }) => {
@@ -46,11 +47,7 @@ const CustomLegend = () => {
 };
 
 function Activity({ activity }) {
-  const data = activity.sessions.map((session, index) => ({
-    name: index + 1,
-    valueKG: session.kilogram,
-    valueCal: session.calories,
-  }));
+  const data = formatActivity(activity);
 
   return (
     <div className="profile-activity xl:w-208 h-80 bg-gray-50 font-medium text-15 p-6 rounded-md">

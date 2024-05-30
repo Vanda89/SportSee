@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import Router from './Router.jsx';
 import Header from './components/Header/index.jsx';
@@ -7,9 +7,10 @@ import { UserContext } from './contexts/UserContext';
 import './style.css';
 
 function App() {
-  const [userId, setUserId] = React.useState(null);
-  const [isLinkEnabled, setIsLinkEnabled] = React.useState(false);
+  const [userId, setUserId] = useState(null);
+  const [isLinkEnabled, setIsLinkEnabled] = useState(false);
 
+  // Use a Provider to pass the userId and the isLinkEnabled state to all components
   return (
     <React.StrictMode>
       <UserContext.Provider
@@ -17,7 +18,7 @@ function App() {
       >
         <BrowserRouter>
           <Header />
-          <div className="flex justify-between">
+          <div className="flex justify-between ">
             <Navbar />
             <Router />
           </div>
