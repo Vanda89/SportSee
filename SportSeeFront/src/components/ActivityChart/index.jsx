@@ -12,6 +12,12 @@ import {
 import { formatActivity } from '../../data/formatData';
 import PropTypes from 'prop-types';
 
+/**
+ * Custom tooltip component that displays when the user hovers over a bar in the chart.
+ * @param {boolean} props.active - Whether the tooltip is active.
+ * @param {Array} props.payload - The data for the tooltip. Each item in the array represents a bar in the chart and contains the value for that bar.
+ * @returns {JSX.Element|null} The JSX for the tooltip, or null if the tooltip is not active or there is no data.
+ */
 const CustomTooltip = ({ active, payload }) => {
   if (active && payload && payload.length) {
     return (
@@ -28,6 +34,7 @@ CustomTooltip.propTypes = {
   payload: PropTypes.array.isRequired,
 };
 
+// Custom legend displays at the top of the chart
 const CustomLegend = () => {
   return (
     <div className="flex justify-between items-center font-medium mb-20 mr-5">
@@ -46,7 +53,19 @@ const CustomLegend = () => {
   );
 };
 
+/**
+ * Activity component for displaying the activity chart with the data provided.
+ * @param {Object} props.activity - The activity data for the chart.
+ * @returns {JSX.Element} The JSX for the activity chart.
+ */
 function Activity({ activity }) {
+  /**
+   * The data formatted for the activity chart with the weight and calorie values and the index that represents the days of the week
+   * @type {Array}
+   * @property {string} name - The day of the week.
+   * @property {number} valueKG - The weight value for the day.
+   * @property {number} valueCal - The calorie value for the day.
+   */
   const data = formatActivity(activity);
 
   return (

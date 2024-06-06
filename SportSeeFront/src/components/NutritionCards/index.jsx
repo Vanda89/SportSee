@@ -5,6 +5,15 @@ import carbohydrateIcon from '../../assets/icons/carbohydrate.png';
 import lipidIcon from '../../assets/icons/lipid.png';
 import { formatNutritionInfos } from '../../data/formatData';
 
+/**
+ * NutritionItem component.
+ * @param {string} props.className - Style CSS of the component.
+ * @param {Object} props.icon - Imported image object for the component.
+ * @param {(string|number)} props.value - Value of the component.
+ * @param {string} props.label - Label of the component.
+ * @param {string} props.bgColor - Background color of the icon.
+ * @returns {JSX.Element} Rendered component instance.
+ */
 function NutritionItem({ className, icon, value, label, bgColor }) {
   return (
     <div
@@ -27,7 +36,20 @@ NutritionItem.propTypes = {
   bgColor: PropTypes.string.isRequired,
 };
 
+/**
+ * NutritionCards component.
+ * @param {Object} props.nutritionInfos - Nutrition information.
+ * @returns {JSX.Element} Rendered component instance.
+ */
 function NutritionCards({ nutritionInfos }) {
+  /**
+   * Data formatted with value and unit.
+   * @type {Object}
+   * @property {number} calorieCount - Calorie count.
+   * @property {number} proteinCount - Protein count.
+   * @property {number} carbohydrateCount - Carbohydrate count.
+   * @property {number} lipidCount - Lipid count.
+   */
   const formattedNutritionInfos = formatNutritionInfos(nutritionInfos);
 
   return (

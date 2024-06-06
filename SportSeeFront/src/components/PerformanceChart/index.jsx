@@ -2,7 +2,19 @@ import PropTypes from 'prop-types';
 import { Radar, RadarChart, PolarGrid, PolarAngleAxis } from 'recharts';
 import { formatPerformance } from '../../data/formatData';
 
+/**
+ * PerformanceChart is a component that displays performance metrics on a radar chart for easy comparison and analysis.
+ * @param {Object} performance - The performance data to display.
+ * Each object in the array should have a `kind` property (a number) and a `value` property (a number).
+ * @returns {JSX.Element} The rendered component instance.
+ */
 function PerformanceChart({ performance }) {
+  /**
+   * Data formatted with the performance metrics.
+   * @type {Array}
+   * @property {string} kind - The kind of performance metric.
+   * @property {number} value - The value of the performance metric.
+   */
   const data = formatPerformance(performance);
 
   return (

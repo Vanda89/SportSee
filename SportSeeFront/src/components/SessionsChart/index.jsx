@@ -2,6 +2,12 @@ import PropTypes from 'prop-types';
 import { LineChart, Line, XAxis, YAxis, Tooltip, Legend } from 'recharts';
 import { formatAverageSessions } from '../../data/formatData';
 
+/**
+ * CustomCursor is a functional component that renders a red gradient rectangle to the left of the active dot.
+ * @param {Object} props - The props passed to the component.
+ * @param {Array} props.points - The points at which the cursor is currently located.
+ * @returns {JSX.Element} A red gradient rectangle.
+ */
 const CustomCursor = (props) => {
   const { points } = props;
   const { x } = points[0];
@@ -34,6 +40,12 @@ CustomCursor.propTypes = {
   ),
 };
 
+/**
+ * ActiveDot is a functional component that renders a custom dot for the active data point.
+ * @param {number} props.cx - The x-coordinate of the center of the dot.
+ * @param {number} props.cy - The y-coordinate of the center of the dot.
+ * @returns {JSX.Element} A group of two circles that form the custom dot.
+ */
 const ActiveDot = ({ cx, cy }) => (
   <g>
     <circle
@@ -52,7 +64,18 @@ ActiveDot.propTypes = {
   cy: PropTypes.number.isRequired,
 };
 
+/**
+ * SessionsChart is a functional component that renders a line chart of session data.
+ * @param {Object} sessions - An object containing an array of session data.
+ * @returns {JSX.Element} A line chart rendered with Recharts.
+ */
 function SessionsChart({ sessions }) {
+  /**
+   * Data formatted with the average session length for each day of the week.
+   * @type {Array}
+   * @property {string} day - The day of the week.
+   * @property {number} value - The average session length for the day.
+   */
   const data = formatAverageSessions(sessions);
 
   return (

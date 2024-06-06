@@ -14,7 +14,7 @@ function Home() {
   }
 
   if (error) {
-    return <div>Une erreur est survenue : {error.message}</div>;
+    return <div>Une erreur est survenue, veuillez réessayer plus tard.</div>;
   }
 
   const handleUserButtonClick = (userId) => {

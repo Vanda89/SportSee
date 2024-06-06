@@ -2,6 +2,11 @@ import PropTypes from 'prop-types';
 import { RadialBarChart, RadialBar, Legend, Cell } from 'recharts';
 import { formatProfileObjective } from '../../data/formatData';
 
+/**
+ * CustomizedLabel is a component that displays the percentage value of the user's achieved score.
+ * @param {number} value - The value to display.
+ * @returns {JSX.Element} The rendered component instance.
+ */
 const CustomizedLabel = ({ value }) => (
   <text
     className="objective-percentage fill-custom-slate-800 font-bold text-26"
@@ -31,7 +36,18 @@ CustomizedLabel.propTypes = {
   value: PropTypes.number,
 };
 
+/**
+ * ObjectiveChart is a component that displays a radial chart to represent the objectives achieved by users.
+ * @param {number} objectives - The objectives to display.
+ * @returns {JSX.Element} The rendered component instance.
+ */
 function ObjectiveChart({ objectives }) {
+  /**
+   * Data formatted with the user's achieved score.
+   * @type {Array}
+   * @property {number} value - The user's achieved score.
+   * @property {string} name - The name of the data.
+   */
   const data = formatProfileObjective(objectives);
 
   return (
