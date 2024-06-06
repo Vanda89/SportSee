@@ -1,6 +1,14 @@
 import { useEffect, useState } from 'react';
 import { getUsers } from '../../../services/apiService';
 
+/**
+ *
+ * Custom hook to fetch user data.
+ * @returns {Object} The user data, loading state, and any error encountered.
+ * @property {Object} users - The user data.
+ * @property {Error} error - Any error encountered while fetching the data.
+ * @property {boolean} isLoading - The loading state of the data fetch.
+ */
 export function useGetUsers() {
   // Initialize the state variables
   const [users, setUsers] = useState(null);

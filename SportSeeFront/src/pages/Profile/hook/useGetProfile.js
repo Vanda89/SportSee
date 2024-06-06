@@ -14,7 +14,7 @@ import {
  * @property {Object} data - The user data.
  * @property {Object} data.profile - The user's profile data.
  * @property {Object} data.activity - The user's activity data.
- * @property {boolean} data.averageSessions - The user's average sessions data.
+ * @property {Object} data.averageSessions - The user's average sessions data.
  * @property {Object} data.performance - The user's performance data.
  * @property {Error} error - Any error encountered while fetching the data.
  * @property {boolean} isLoading - The loading state of the data fetch.
@@ -23,7 +23,7 @@ export function useGetProfile({ id }) {
   // Initialize the state variables
   const [profile, setProfile] = useState(null);
   const [activity, setActivity] = useState(null);
-  const [averageSessions, setAverageSessions] = useState(true);
+  const [averageSessions, setAverageSessions] = useState(null);
   const [performance, setPerformance] = useState(null);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
