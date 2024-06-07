@@ -3,7 +3,7 @@ import calorieIcon from '../../assets/icons/calorie.png';
 import proteinIcon from '../../assets/icons/protein.png';
 import carbohydrateIcon from '../../assets/icons/carbohydrate.png';
 import lipidIcon from '../../assets/icons/lipid.png';
-import { formatNutritionInfos } from '../../data/formatData';
+import FormatData from '../../data/formatData';
 
 /**
  * NutritionItem component.
@@ -50,35 +50,36 @@ function NutritionCards({ nutritionInfos }) {
    * @property {number} carbohydrateCount - Carbohydrate count.
    * @property {number} lipidCount - Lipid count.
    */
-  const formattedNutritionInfos = formatNutritionInfos(nutritionInfos);
+  const formatter = new FormatData();
+  const formattedData = formatter.formatNutritionInfos(nutritionInfos);
 
   return (
     <aside className="profile-activity-resume flex flex-wrap xl:flex-nowrap xl:flex-col gap-10 font-bold justify-center lg:justify-between w-full lg:w-auto">
       <NutritionItem
         className="calories"
         icon={calorieIcon}
-        value={formattedNutritionInfos.calorieCount}
+        value={formattedData.calorieCount}
         label="Calories"
         bgColor="bg-red-100"
       />
       <NutritionItem
         className="protein"
         icon={proteinIcon}
-        value={formattedNutritionInfos.proteinCount}
+        value={formattedData.proteinCount}
         label="Proteines"
         bgColor="bg-blue-100"
       />
       <NutritionItem
         className="carbohydrates"
         icon={carbohydrateIcon}
-        value={formattedNutritionInfos.carbohydrateCount}
+        value={formattedData.carbohydrateCount}
         label="Glucides"
         bgColor="bg-yellow-100"
       />
       <NutritionItem
         className="lipids"
         icon={lipidIcon}
-        value={formattedNutritionInfos.lipidCount}
+        value={formattedData.lipidCount}
         label="Lipides"
         bgColor="bg-pink-100"
       />

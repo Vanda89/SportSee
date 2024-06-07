@@ -9,7 +9,7 @@ import {
   Legend,
   ResponsiveContainer,
 } from 'recharts';
-import { formatActivity } from '../../data/formatData';
+import FormatData from '../../data/formatData';
 import PropTypes from 'prop-types';
 
 /**
@@ -66,13 +66,14 @@ function Activity({ activity }) {
    * @property {number} valueKG - The weight value for the day.
    * @property {number} valueCal - The calorie value for the day.
    */
-  const data = formatActivity(activity);
+  const formatter = new FormatData();
+  const { formattedData, minCal, maxKG } = formatter.formatActivity(activity);
 
   return (
     <div className="profile-activity xl:w-208 h-80 bg-gray-50 font-medium text-15 p-6 rounded-md">
       <ResponsiveContainer width="100%" height="100%">
         <BarChart
-          data={data}
+          data={formattedData}
           barGap={10}
           margin={{
             top: 5,
@@ -83,36 +84,33 @@ function Activity({ activity }) {
         >
           <CartesianGrid
             className="stroke-custom-gray-300"
-            strokeDasharray="3 3 "
+            strokeDasharray="2.5 2.5 "
             vertical={false}
           />
+
           <XAxis
             dataKey="name"
-            className="fill-custom-slate-300"
-            padding={{ left: -40, right: -50 }}
+            className="fill-custom-slate-300 stroke-gray-200 "
+            padding={{ left: -50, right: -50 }}
             margin={{ left: 0, right: 0 }}
             tick={{ fill: 'var(--color-custom-slate-300)' }}
             tickMargin={20}
             tickLine={false}
-            axisLine={false}
+            axisLine={{
+              stroke: 'var(--color-gray-200)',
+              strokeWidth: 2,
+            }}
           />
           <YAxis
             className="fill-custom-slate-300"
             yAxisId="right"
             orientation="right"
+            domain={[minCal, maxKG]}
             tick={{ fill: 'var(--color-custom-slate-300)' }}
             tickLine={false}
             axisLine={false}
             tickMargin={50}
-          />
-          <YAxis
-            className="fill-custom-slate-300"
-            yAxisId="left"
-            orientation="left"
-            tick={{ fill: 'var(--color-custom-slate-300)' }}
-            tickLine={false}
-            tickMargin={50}
-            axisLine={false}
+            tickCount={3}
           />
           <Tooltip
             content={CustomTooltip}
@@ -125,7 +123,7 @@ function Activity({ activity }) {
           <Bar
             dataKey="valueKG"
             className="fill-custom-slate-800"
-            yAxisId="left"
+            yAxisId="right"
             barSize={7}
             radius={[20, 20, 0, 0]}
           />

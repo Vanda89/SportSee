@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { RadialBarChart, RadialBar, Legend, Cell } from 'recharts';
-import { formatProfileObjective } from '../../data/formatData';
+import FormatData from '../../data/formatData';
 
 /**
  * CustomizedLabel is a component that displays the percentage value of the user's achieved score.
@@ -48,7 +48,8 @@ function ObjectiveChart({ objectives }) {
    * @property {number} value - The user's achieved score.
    * @property {string} name - The name of the data.
    */
-  const data = formatProfileObjective(objectives);
+  const formatter = new FormatData();
+  const formattedData = formatter.formatProfileObjective(objectives);
 
   return (
     <div className="profile-objective relative h-64 w-64 bg-gray-50 rounded-md flex items-center justify-center">
@@ -60,9 +61,9 @@ function ObjectiveChart({ objectives }) {
         innerRadius="90%"
         outerRadius="110%"
         barSize={10}
-        data={data}
+        data={formattedData}
         startAngle={90}
-        endAngle={360 * data[0].value + 90}
+        endAngle={360 * formattedData[0].value + 90}
         style={{ position: 'absolute', zIndex: 1 }}
       >
         <RadialBar

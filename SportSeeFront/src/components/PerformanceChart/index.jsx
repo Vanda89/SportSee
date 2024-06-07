@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { Radar, RadarChart, PolarGrid, PolarAngleAxis } from 'recharts';
-import { formatPerformance } from '../../data/formatData';
+import FormatData from '../../data/formatData';
 
 /**
  * PerformanceChart is a component that displays performance metrics on a radar chart for easy comparison and analysis.
@@ -15,13 +15,14 @@ function PerformanceChart({ performance }) {
    * @property {string} kind - The kind of performance metric.
    * @property {number} value - The value of the performance metric.
    */
-  const data = formatPerformance(performance);
+  const formatter = new FormatData();
+  const formattedData = formatter.formatPerformance(performance);
 
   return (
     <div className="profile-performance h-full w-64 bg-custom-slate-800 rounded-md text-white flex justify-center items-center">
       <RadarChart
         className="fill-white"
-        data={data}
+        data={formattedData}
         width={250}
         height={250}
         cx="50%"

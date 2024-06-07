@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { LineChart, Line, XAxis, YAxis, Tooltip, Legend } from 'recharts';
-import { formatAverageSessions } from '../../data/formatData';
+import FormatData from '../../data/formatData';
 
 /**
  * CustomCursor is a functional component that renders a red gradient rectangle to the left of the active dot.
@@ -76,14 +76,15 @@ function SessionsChart({ sessions }) {
    * @property {string} day - The day of the week.
    * @property {number} value - The average session length for the day.
    */
-  const data = formatAverageSessions(sessions);
+  const formatter = new FormatData();
+  const formattedData = formatter.formatAverageSessions(sessions);
 
   return (
     <div className="profile-average-sessions h-full w-64 h-64 bg-custom-red-600  text-15 rounded-md">
       <LineChart
         width={256}
         height={264}
-        data={data}
+        data={formattedData}
         margin={{ top: 30, bottom: 15, left: -15, right: -15 }}
         cursor={{ stroke: 'rgba(255, 0, 0, 0.5)', strokeWidth: 2 }}
       >
