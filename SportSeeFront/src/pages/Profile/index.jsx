@@ -41,7 +41,7 @@ function Profile() {
   return (
     <div className="flex w-full h-full flex-col px-12 md:px-auto xl:px-26 py-10 xl:py-14 gap-16">
       <section className="profile-header flex flex-col items-center lg:items-start 2xl:items-center gap-8">
-        <h1 className="font-medium text-5xl">
+        <h1 className="font-medium text-3xl lg:text-4xl xl:text-5xl">
           Bonjour{' '}
           <span className="text-custom-red-600">
             {profile.userInfos.firstName}

@@ -80,7 +80,7 @@ function SessionsChart({ sessions }) {
   const formattedData = formatter.formatAverageSessions(sessions);
 
   return (
-    <div className="profile-average-sessions h-full w-64 h-64 bg-custom-red-600  text-15 rounded-md">
+    <div className="profile-average-sessions  w-64 h-64 bg-custom-red-600  text-15 rounded-md">
       <LineChart
         width={256}
         height={264}

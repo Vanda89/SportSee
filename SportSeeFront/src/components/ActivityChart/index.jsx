@@ -37,14 +37,14 @@ CustomTooltip.propTypes = {
 // Custom legend displays at the top of the chart
 const CustomLegend = () => {
   return (
-    <div className="flex justify-between items-center font-medium mb-20 mr-5">
+    <div className="flex flex-col md:flex-row gap-2 justify-between items-center font-medium mb-20 mr-5">
       <p className="text-custom-slate-800">Activité quotidienne</p>
       <div className="flex h-6 gap-10 text-custom-slate-500 ">
-        <div className="flex gap-3 h-full items-baseline ">
+        <div className="flex gap-2 md:gap-3 h-full items-baseline ">
           <span className="w-2 h-2 bg-custom-slate-800 rounded-full"></span>
           <p className="">Poids (kg)</p>
         </div>
-        <div className="flex gap-3 h-full items-baseline ">
+        <div className="flex gap-2 md:gap-3 h-full items-baseline ">
           <span className="w-2 h-2 bg-custom-red-600 rounded-full"></span>
           <p className="">Calories brûlées (kCal)</p>
         </div>
@@ -74,6 +74,7 @@ function Activity({ activity }) {
       <ResponsiveContainer width="100%" height="100%">
         <BarChart
           data={formattedData}
+          barCategoryGap="5%"
           barGap={10}
           margin={{
             top: 5,
@@ -91,7 +92,6 @@ function Activity({ activity }) {
           <XAxis
             dataKey="name"
             className="fill-custom-slate-300 stroke-gray-200 "
-            padding={{ left: -50, right: -50 }}
             margin={{ left: 0, right: 0 }}
             tick={{ fill: 'var(--color-custom-slate-300)' }}
             tickMargin={20}

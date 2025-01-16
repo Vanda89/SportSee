@@ -6,7 +6,6 @@ import bodybuilding from '../../assets/icons/bodybuilding.png';
 import { NavLink } from 'react-router-dom';
 import { UserContext } from '../../contexts/UserContext';
 
-//<p className=" w-1/4 ml-8">Copyright, SportSee 2020</p>{' '}
 export default function NavBar() {
   const { isLinkEnabled } = React.useContext(UserContext);
 
@@ -18,23 +17,24 @@ export default function NavBar() {
   ];
 
   return (
-    <div className="fixed flex relative justify-around flex-col items-center h-auto bg-black text-white w-28 m-0 p-0">
-      <nav className="pt-64">
-        <ul className="flex flex-col gap-5 items-center">
+    <div className="flex flex-col gap-48 xl:gap-0 pt-16 xl:pt-0 bg-black text-white w-20  md:w-28 m-0 p-0 ">
+      {/* Navigation */}
+      <nav className=" flex xl:flex-grow xl:items-center justify-center ">
+        <ul className="flex flex-col gap-5 items-center ">
           {icons.map((icon, index) => (
             <li key={index}>
               {isLinkEnabled ? (
                 <NavLink to="">
                   <img
                     src={icon.src}
-                    className="bg-neutral-100 p-4 rounded-md"
+                    className="bg-neutral-100 p-2 lg:p-4 rounded-md"
                     alt={icon.alt}
                   />
                 </NavLink>
               ) : (
                 <img
                   src={icon.src}
-                  className="bg-neutral-100 p-4 rounded-md"
+                  className="bg-neutral-100 p-2 lg:p-4 rounded-md"
                   alt={icon.alt}
                 />
               )}
@@ -42,7 +42,9 @@ export default function NavBar() {
           ))}
         </ul>
       </nav>
-      <p className="rotate-270 h-24  whitespace-nowrap flex items-center justify-start text-xs ">
+
+      {/* Copyright */}
+      <p className="rotate-270 flex whitespace-nowrap text-xs mb-24">
         Copyright, SportSee 2020
       </p>
     </div>

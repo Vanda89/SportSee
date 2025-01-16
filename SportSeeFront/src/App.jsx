@@ -17,10 +17,12 @@ function App() {
         value={{ userId, setUserId, isLinkEnabled, setIsLinkEnabled }}
       >
         <BrowserRouter>
-          <Header />
-          <div className="flex justify-between ">
-            <Navbar />
-            <Router />
+          <div className="flex flex-col w-full h-screen xl:overflow-hidden ">
+            <Header />
+            <div className="flex xl:h-[calc(100%-6rem)]  ">
+              <Navbar />
+              <Router />
+            </div>
           </div>
         </BrowserRouter>
       </UserContext.Provider>

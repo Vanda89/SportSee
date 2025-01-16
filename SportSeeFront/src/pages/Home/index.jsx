@@ -23,9 +23,9 @@ function Home() {
   };
 
   return (
-    <section className="flex w-full h-screen flex-col px-12 xl:px-26 py-10 xl:py-14 gap-32">
+    <section className="flex w-full h-full flex-col px-12 xl:px-26 py-10 xl:py-14 gap-32">
       <div className="welcome-message flex flex-col gap-8">
-        <h1 className="font-medium text-5xl">
+        <h1 className="font-medium text-3xl lg:text-4xl xl:text-5xl">
           Bienvenue chez <span className="text-custom-red-600">SportSee</span>
         </h1>
         <p className="text-lg">
@@ -34,7 +34,7 @@ function Home() {
         </p>
       </div>
       <div className="flex flex-col items-center gap-12">
-        <h2 className="text-3xl font-medium">
+        <h2 className="text-2xl xl:text-3xl font-medium">
           Choisissez un profil à consulter :{' '}
         </h2>
         <div>
@@ -42,7 +42,7 @@ function Home() {
             <NavLink key={user.id} to={`profile/${user.id}`}>
               <button
                 onClick={() => handleUserButtonClick(user.id)}
-                className=" font-medium text-lg border border-red-500 shadow-md border-2 w-40 h-16 px-4 py-2 rounded-md mx-10"
+                className=" font-medium text-lg  border-red-500 shadow-md border-2 w-40 h-16 px-4 py-2 rounded-md mx-10"
               >
                 {user.userInfos.lastName + ' ' + user.userInfos.firstName}
               </button>

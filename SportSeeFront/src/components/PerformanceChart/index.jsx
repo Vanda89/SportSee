@@ -19,7 +19,7 @@ function PerformanceChart({ performance }) {
   const formattedData = formatter.formatPerformance(performance);
 
   return (
-    <div className="profile-performance h-full w-64 bg-custom-slate-800 rounded-md text-white flex justify-center items-center">
+    <div className="profile-performance h-64 w-64 bg-custom-slate-800 rounded-md text-white flex justify-center items-center">
       <RadarChart
         className="fill-white"
         data={formattedData}
