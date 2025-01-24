@@ -17,8 +17,7 @@ import {
  * @returns {Promise} A promise that resolves to an array of user objects
  */
 export function getUsers() {
-  const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
-
+  const apiBaseUrl = '/api';
   if (CONFIG.mock) {
     const users = USER_MAIN_DATA;
     if (!users) {
@@ -58,8 +57,7 @@ export function getUserData(userId) {
     }
     return Promise.resolve(user);
   } else {
-    const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
-
+    const apiBaseUrl = '/api';
     return fetch(`${apiBaseUrl}/user/${userId}`)
       .then((response) => response.json())
       .then((response) => response.data)
@@ -82,8 +80,7 @@ export function getUserActivity(userId) {
     }
     return Promise.resolve(activity);
   } else {
-    const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
-
+    const apiBaseUrl = '/api';
     return fetch(`${apiBaseUrl}/user/${userId}/activity`)
       .then((response) => response.json())
       .then((response) => response.data)
@@ -106,8 +103,7 @@ export function getUserAverageSessions(userId) {
     }
     return Promise.resolve(averageSessions);
   } else {
-    const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
-
+    const apiBaseUrl = '/api';
     return fetch(`${apiBaseUrl}/user/${userId}/average-sessions`)
       .then((response) => response.json())
       .then((response) => response.data)
@@ -130,8 +126,7 @@ export function getUserPerformance(userId) {
     }
     return Promise.resolve(performance);
   } else {
-    const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
-
+    const apiBaseUrl = '/api';
     return fetch(`${apiBaseUrl}/user/${userId}/performance`)
       .then((response) => response.json())
       .then((response) => response.data)
